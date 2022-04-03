@@ -100,12 +100,12 @@ function game(){
     fill(255, 255, 255);
     textSize(40);
     textAlign(CENTER);
-    text("GAME OVER", gameConfig.screenX/2, gameConfig.screenY/2+105);
+    text("ABDUCTED BY ALIENS!", gameConfig.screenX/2, gameConfig.screenY/2+105);
     textSize(15);
-    text("Press SPACE to Restart", gameConfig.screenX/2, gameConfig.screenY/2+135);
+    text("Click Space To Try Again", gameConfig.screenX/2, gameConfig.screenY/2+135);
     textSize(40);
     text(round(gameConfig.scores),gameConfig.screenX/2,gameConfig.screenY/2-35);
-    text("points",gameConfig.screenX/2,gameConfig.screenY/2);
+    text("Time:",gameConfig.screenX/2,gameConfig.screenY/2);
 
     stroke(255);
     strokeWeight(7);
@@ -160,7 +160,7 @@ function instializeInSetup(character){
 
   // change the scale of clouds
 	clouds.forEach(function(element){
-		element.scale=random(1,1,1.5);
+		element.scale=random(1,2);
 	})
 }
 
@@ -179,7 +179,7 @@ function initializeCharacterStatus(character){
 }
 
 function instializeInDraw(){
-  background(21,28,50);
+  background(48, 25, 52);
   
   //while killing
   if(mario.killing>0){
@@ -311,9 +311,8 @@ function manualControl(character){
 /* Movements of character */
 function jumping(character){
 	if( (noseY < 168  &&character.live) || (touchIsDown&&character.live) ){
-    mario_jump.play();
     character.velocity.y+=gameConfig.jump;
-
+    mario_jump.play();
 	}
 }
 
@@ -384,7 +383,7 @@ function die(character){
     console.log("die - " + character.liveNumber);
     if(character.liveNumber > 0)
     {
-      mario_die.play();i
+      mario_die.play();
     }
 }
 
@@ -508,7 +507,7 @@ function moveEnvironment(character){
   if(gameConfig.status==='play'){
     environmentScrolling(platforms,environmentScrollingSpeed);
     environmentScrolling(bricks,environmentScrollingSpeed);
-    environmentScrolling(clouds,environmentScrollingSpeed*0.4);
+    environmentScrolling(clouds,environmentScrollingSpeed*0.5);
     environmentScrolling(mountains,environmentScrollingSpeed*1.3); 
     environmentScrolling(pipes,environmentScrollingSpeed); 
     environmentScrolling(coins,environmentScrollingSpeed); 
@@ -591,8 +590,8 @@ function scores(character){
 
   if(character.live&&gameConfig.status==='play') gameConfig.timeScores+=0.05;
   
-  text("scores: "+round(gameConfig.scores),20,40);
-  text("lives: "+character.liveNumber,20,80);
+  text("Time: "+round(gameConfig.scores),20,40);
+  text("Lives: "+character.liveNumber,20,80);
 
   if(mario.live==false && mario.liveNumber!=0){
     fill(0,0,0,150);
@@ -612,7 +611,7 @@ function scores(character){
     textAlign(CENTER);
     textSize(40);
     text(round(character.liveNumber),gameConfig.screenX/2,gameConfig.screenY/2-35);
-    text("lives",gameConfig.screenX/2,gameConfig.screenY/2);
+    text("Lives",gameConfig.screenX/2,gameConfig.screenY/2);
 
     
   }
